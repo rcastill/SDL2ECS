@@ -34,16 +34,13 @@ void Entity::SetGame(Game *game)
 	if (this->game == NULL) {
 		this->game = game;
 
-		vector<Component>::iterator compit;
-
-		for (compit = components.begin(); compit != components.end(); compit++)
-			compit->SetGame(game);
+		for (unsigned int i = 0; i < components.size(); i++)
+			components[i]->SetGame(game);
 	}
 }
 
 void Entity::InitComponents()
 {
-	vector<Component>::iterator compit;
-	for (compit = components.begin(); compit != components.end(); compit++)
-		compit->Init();
+	for (unsigned int i = 0; i < components.size(); i++)
+		components[i]->Init();
 }
