@@ -22,6 +22,9 @@ public:
 	template <typename T>
 	void Instantiate();
 	
+	template <typename T>
+	T *AddComponent();
+	
 	template <typename Derived>
 	Derived *GetComponent();
 

@@ -20,7 +20,9 @@ public:
 	Entity();
 	void SetGame(Game *game);
 
-	void AddComponent(Component *component);
+	template <typename T>
+	T *AddComponent();
+
 	vector<Component*>& GetComponents();
 
 	template <typename Derived>

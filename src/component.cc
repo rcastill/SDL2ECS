@@ -23,6 +23,13 @@ void Component::Instantiate()
 	game->Instantiate<T>();
 }
 
+template <typename T>
+T *Component::AddComponent()
+{
+	assert(entity != NULL);
+	return entity->AddComponent<T>();
+}
+
 template <typename Derived>
 Derived *Component::GetComponent()
 {

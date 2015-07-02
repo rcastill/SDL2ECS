@@ -20,10 +20,13 @@ Derived *Entity::GetComponent()
 	return NULL;
 }
 
-void Entity::AddComponent(Component *component)
+template <typename T>
+T *Entity::AddComponent()
 {
+	T *component = new T;
 	component->SetEntity(this);
 	components.push_back(component);
+	return component;
 }
 
 void Entity::SetGame(Game *game)
