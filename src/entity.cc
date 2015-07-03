@@ -42,12 +42,8 @@ T *Entity::AddComponent()
 
 void Entity::SetGame(Game *game)
 {
-	if (this->game == NULL) {
+	if (this->game == NULL)
 		this->game = game;
-
-		for (unsigned int i = 0; i < components.size(); i++)
-			components[i]->SetGame(game);
-	}
 }
 
 void Entity::SetTexture(string path)
@@ -63,6 +59,13 @@ Texture *Entity::GetTexture()
 
 void Entity::InitComponents()
 {
-	for (unsigned int i = 0; i < components.size(); i++)
+	for (unsigned int i = 0; i < components.size(); i++) {
+		components[i]->SetGame(game);
 		components[i]->Init();
+	}
+}
+
+Transform &Entity::GetTransform()
+{
+	return transform;
 }

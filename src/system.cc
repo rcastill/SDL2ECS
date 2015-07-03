@@ -1,4 +1,6 @@
-System::System() : game(NULL)
+#include "system.h"
+
+System::System() : game(NULL), setFailure(false)
 {
 }
 
@@ -20,6 +22,6 @@ string System::GetError()
 
 void System::PushError(string detail)
 {
-	setFailure = true
+	setFailure = true;
 	failureDetail = detail;
 }

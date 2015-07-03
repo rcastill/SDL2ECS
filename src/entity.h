@@ -7,6 +7,9 @@
 #include "transform.h"
 #include <vector>
 
+class Component;
+class Texture;
+
 using namespace std;
 
 class Entity
@@ -17,9 +20,6 @@ private:
 	vector<Component *> components;
 
 	Transform transform;
-
-protected:
-	// Transform
 
 public:
 	Entity();
@@ -40,6 +40,8 @@ public:
 	template <typename Derived>
 	Derived *GetComponent();
 
+	virtual void Init();
+	
 	void InitComponents();
 };
 

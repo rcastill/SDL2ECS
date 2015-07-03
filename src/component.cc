@@ -4,12 +4,18 @@ Component::Component() : game(NULL), entity(NULL)
 {
 }
 
+Transform &Component::GetTransform()
+{
+	assert(entity != NULL);
+	return entity->GetTransform();
+}
+
 void Component::PushError(string failureDetail)
 {
 	this->failureDetail = failureDetail;
 }
 
-void Component::GetError()
+string Component::GetError()
 {
 	return failureDetail;
 }
@@ -49,9 +55,27 @@ Derived *Component::GetComponent()
 
 void Component::SetDrawColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
-	assert(game != NULL)
+	assert(game != NULL);
 	Renderer *renderer = game->GetRenderer();
 
 	assert(renderer != NULL);
 	renderer->SetDrawColor(r, g, b, a);
+}
+
+bool Component::GetKeyDown(SDL_Keycode key)
+{
+	assert(game != NULL);
+	Input *input = game->GetInput();
+
+	assert(input != NULL);
+	return input->GetKeyDown(key);
+}
+
+bool Component::GetKeyPressed(SDL_Keycode key)
+{
+	assert(game != NULL);
+	Input *input = game->GetInput();
+
+	assert(input != NULL);
+	return input->GetKeyPressed(key);
 }

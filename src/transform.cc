@@ -61,3 +61,14 @@ Transform::operator SDL_Rect*()
 
 	return NULL;
 }
+
+ostream &operator << (ostream &stream, Transform &transform)
+{
+	int x = transform.x;
+	int y = transform.y;
+	int w = transform.w;
+	int h = transform.h;
+	int r = transform.r;
+
+	return stream << "{x: " << x << ", y: " << y << ", w: " << w << ", h: " << h << ", r: " << r << "}";
+}

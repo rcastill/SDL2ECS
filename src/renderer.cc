@@ -7,7 +7,7 @@ Renderer::Renderer(Display *display, Uint8 r, Uint8 g, Uint8 b, Uint8 a) : rende
 		return;
 	}
 
-	renderer = SDL_CreateRenderer(display.GetSDLWindow(), -1, SDL_RENDERER_ACCELERATED);
+	renderer = SDL_CreateRenderer(display->GetSDLWindow(), -1, SDL_RENDERER_ACCELERATED);
 
 	if (renderer == NULL) {
 		PushError(string(SDL_GetError()));
@@ -20,14 +20,14 @@ Renderer::Renderer(Display *display) : Renderer(display, DEFAULT_DRAW_COLOR_R, D
 {
 }
 
-~Renderer()
+Renderer::~Renderer()
 {
 	SDL_DestroyRenderer(renderer);
 }
 
 SDL_Texture *Renderer::CreateTexture(SDL_Surface *surface)
 {
-	return SDL_CreateTextureFromSurface(surface);
+	return SDL_CreateTextureFromSurface(renderer, surface);
 }
 
 void Renderer::RenderTextures()
@@ -39,7 +39,7 @@ void Renderer::RenderTextures()
 		Texture *texture = entities[i]->GetTexture();
 
 		if (texture != NULL)
-			SDL_RenderCopy(renderer, texture, texture->GetFrame(), texture->GetTransform());
+			SDL_RenderCopy(renderer, (SDL_Texture*)texture, texture->GetFrame(), entities[i]->GetTransform());
 	}
 }
 

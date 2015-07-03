@@ -1,15 +1,17 @@
 #ifndef SYSTEM_H
 #define SYSTEM_H
 
-#include "game.h"
+class Game;
+
+#include <iostream>
+
+using namespace std;
 
 class System
 {
-private:
-	Game *game;
-
 protected:
-	bool setFailure = false;
+	Game *game;
+	bool setFailure;
 	string failureDetail;
 
 	void PushError(string detail);

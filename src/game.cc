@@ -1,12 +1,11 @@
 #include "game.h"
 
-Game::Game() : running(true), display(NULL), timeController(NULL), renderer(NULL) {}
+Game::Game() : running(true), display(NULL), timeController(NULL), renderer(NULL), input(NULL)
+{
+}
 
 Game::~Game()
 {
-	for (unsigned int i = 0; i < systems.size(); i++)
-		delete systems[i];
-
 	for (unsigned int i = 0; i < entities.size(); i++)
 		delete entities[i];
 
@@ -35,6 +34,11 @@ Renderer *Game::GetRenderer()
 	return renderer;
 }
 
+Input *Game::GetInput()
+{
+	return input;
+}
+
 void Game::LoadDisplay(string title, int width, int height)
 {
 	display = new Display(title, width, height);
@@ -55,9 +59,9 @@ void Game::LoadRenderer(Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 	renderer = new Renderer(display, r, g, b, a);
 }
 
-void Game::LoadSystem(System *psystem)
+void Game::LoadInput()
 {
-	systems.push_back(psystem);
+	input = new Input();
 }
 
 void Game::AddEntity(Entity *entity)
@@ -68,12 +72,24 @@ void Game::AddEntity(Entity *entity)
 template <typename T>
 void Game::Instantiate()
 {
-	T *t = new T;
-	AddEntity(t);
+	T *entity = new T;
+	AddEntity(entity);
 }
 
 void Game::Start()
 {
+	// Initiate display
+	display->Init();
+
+	// Initiate input system
+	input->Init();
+
+	// Initialize entities
+	for (unsigned int i = 0; i < entities.size(); i++) {
+		entities[i]->SetGame(this);
+		entities[i]->Init();
+	}
+
 	assert(renderer != NULL);
 
 	// Load Textures
@@ -84,21 +100,25 @@ void Game::Start()
 			texture->Load(renderer, entities[i]);
 	}
 
-	// Initialize entities
-	for (unsigned int i = 0; i < entities.size(); i++) {
-		entities[i]->SetGame(this);
-		entities[i]->Init();
-	}
+	// Initialize components
+	for (unsigned int i = 0; i < entities.size(); i++)
+		entities[i]->InitComponents();
 
 	while (running) {
+		// Update events
+		input->PollEvents();
+
 		// Iterate through every entity registered in the game
 		for (int i = 0; i < entities.size(); i++) {
 			vector<Component*> &components = entities[i]->GetComponents();
 
 			// Trigger OnUpdate on each component
 			for (unsigned int i = 0; i < components.size(); i++)
-				components[i]->OnUpdate();
+				components[i]->Update();
 		}
+
+		// Reset events
+		input->Reset();
 	}
 }
 

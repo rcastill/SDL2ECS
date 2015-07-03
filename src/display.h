@@ -21,17 +21,16 @@ private:
 public:
 	Display();
 	Display(string title, int width, int height);
-	Display(const Display& display);
 
 	~Display();
+
+	void Init();
 
 	SDL_Window *GetSDLWindow();
 
 	string GetTitle();
 	int GetWidth();
 	int GetHeight();
-
-	Display &operator=(Display &&other);
 };
 
 #endif

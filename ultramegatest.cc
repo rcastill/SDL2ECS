@@ -238,17 +238,8 @@ public:
 
 int main(int argc, char const *argv[])
 {
-	Wrapper wrapper;
-
-	wrapper.y = 10;
-
-	int y = wrapper.y + 5;
-	wrapper.x = y;
-	wrapper.x %= 9;
-	wrapper.Echo();
-
-	cout << y << endl;
-	cout << wrapper.y << endl;
+	vector<int> anal;
+	anal.clear();
 
 	return 0;
 }

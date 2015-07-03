@@ -7,6 +7,9 @@
 #include "entity.h"
 #include "renderer.h"
 
+class Entity;
+class Renderer;
+
 using namespace std;
 
 class Texture

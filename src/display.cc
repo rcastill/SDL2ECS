@@ -10,12 +10,6 @@ Display::Display(string ptitle, int width, int height) : title(ptitle)
 	this->height = height;
 }
 
-Display::Display(const Display& display) : title(display.title)
-{
-	this->width = display.width;
-	this->height = display.height;
-}
-
 Display::~Display()
 {
 	if (window != NULL)
@@ -73,16 +67,4 @@ void Display::Init()
 	/*
 	* TODO: Add more flags / maybe init in separate system
 	*/
-}
-
-Display &Display::operator=(Display &&other)
-{
-	title = other.title;
-	width = other.width;
-	height = other.height;
-	window = other.window;
-	surface = other.surface;
-
-	other.window = NULL;
-	other.surface = NULL;
 }

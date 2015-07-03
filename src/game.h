@@ -3,13 +3,17 @@
 
 #include <SDL2/SDL.h>
 #include <iostream>
-#include "system.h"
 #include "entity.h"
 #include "display.h"
 #include "time.h"
 #include "texture.h"
+#include "input.h"
+#include "renderer.h"
+
 #include <vector>
 #include <cassert>
+
+class Entity;
 
 using namespace std;
 
@@ -23,6 +27,7 @@ private:
 	Display *display;
 	Time *timeController;
 	Renderer *renderer;
+	Input *input;
 
 public:
 	Game();
@@ -34,7 +39,7 @@ public:
 	void LoadRenderer();
 	void LoadRenderer(Uint8 r, Uint8 g, Uint8 b, Uint8 a = 255);
 
-	void LoadSystem(System *system);
+	void LoadInput();
 
 	void AddEntity(Entity *entity);
 
@@ -45,7 +50,8 @@ public:
 
 	Display *GetDisplay();
 	Time *GetTimeController();
-	Renderer *Game::GetRenderer();
+	Renderer *GetRenderer();
+	Input *GetInput();
 
 	void Start();
 };

@@ -2,6 +2,9 @@
 #define TRANSFORM_H
 
 #include <SDL2/SDL.h>
+#include <iostream>
+
+using namespace std;
 
 class IntegerProperty
 {
@@ -42,5 +45,7 @@ public:
 
 	operator SDL_Rect*();
 };
+
+ostream &operator << (ostream &stream, const Transform &transform);
 
 #endif

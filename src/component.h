@@ -4,8 +4,12 @@
 #include <SDL2/SDL.h>
 #include "game.h"
 #include "entity.h"
+#include "input.h"
 #include <cassert>
 #include <iostream>
+#include "transform.h"
+
+class Entity;
 
 using namespace std;
 
@@ -27,6 +31,8 @@ public:
 	void SetGame(Game *game);
 	void SetEntity(Entity *entity);
 
+	Transform &GetTransform();
+
 	template <typename T>
 	void Instantiate();
 	
@@ -38,9 +44,13 @@ public:
 
 	void SetDrawColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a = 255);
 
+	bool GetKeyDown(SDL_Keycode key);
+	bool GetKeyPressed(SDL_Keycode key);
+
 	string GetError();
 	
 	virtual bool Init();
+	virtual void Update();
 };
 
 #endif
