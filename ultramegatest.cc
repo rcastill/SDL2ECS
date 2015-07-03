@@ -152,20 +152,103 @@ public:
 	ComponentC() : Component("ComponentC") {}
 };
 
+
+
+struct coord
+{
+	int x, y;
+};
+
+
+
+class IntegerProperty
+{
+private:
+	int *integer;
+
+public:
+	IntegerProperty(int *pinteger) : integer(pinteger) {}
+
+	operator int()
+	{
+		return *integer;
+	}
+	
+	IntegerProperty	&operator+=(int other)
+	{
+		*integer += other;
+		return *this;
+	}
+
+	IntegerProperty &operator-=(int other)
+	{
+		*integer -= other;
+		return *this;
+	}
+
+	IntegerProperty &operator*=(int other)
+	{
+		*integer *= other;
+		return *this;
+	}
+
+	IntegerProperty &operator/=(int other)
+	{
+		*integer /= other;
+		return *this;
+	}
+
+	IntegerProperty &operator%=(int other)
+	{
+		*integer %= other;
+		return *this;
+	}
+
+	IntegerProperty &operator=(int other)
+	{
+		*integer = other;
+		return *this;
+	}
+};
+
+
+class Wrapper
+{
+private:
+	coord wii;
+
+public:
+	IntegerProperty x;
+	IntegerProperty y;
+	
+	Wrapper() : x(&wii.x), y(&wii.y) {
+		wii.x = wii.y = 0;
+	}
+
+	void Echo()
+	{
+		cout << "(" << wii.x << ", " << wii.y << ")" << endl;
+	}
+};
+
+
+
+
+
+
 int main(int argc, char const *argv[])
 {
-	Componenter componenter;
+	Wrapper wrapper;
 
-	ComponentA *component1 = new ComponentA;
-	ComponentB *component2 = new ComponentB;
-	ComponentC *component3 = new ComponentC;
+	wrapper.y = 10;
 
-	componenter.AddComponent(component1);
-	componenter.AddComponent(component2);
-	//componenter.AddComponent(component3);
+	int y = wrapper.y + 5;
+	wrapper.x = y;
+	wrapper.x %= 9;
+	wrapper.Echo();
 
-	//cout << componenter.GetComponent<ComponentB>() << endl;
-	componenter.GetComponent<InterComponent>()->InterStuff();
+	cout << y << endl;
+	cout << wrapper.y << endl;
 
 	return 0;
 }

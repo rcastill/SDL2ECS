@@ -1,6 +1,17 @@
 #include "entity.h"
 
-Entity::Entity() : game(NULL) {}
+Entity::Entity() : game(NULL), texture(NULL)
+{
+}
+
+Entity::~Entity()
+{
+	for (unsigned int i = 0; i < components.size(); i++)
+		delete components[i];
+
+	if (texture != NULL)
+		delete texture;
+}
 
 vector<Component*>& Entity::GetComponents()
 {
@@ -37,6 +48,17 @@ void Entity::SetGame(Game *game)
 		for (unsigned int i = 0; i < components.size(); i++)
 			components[i]->SetGame(game);
 	}
+}
+
+void Entity::SetTexture(string path)
+{
+	if (texture == NULL)
+		texture = new Texture(path);
+}
+
+Texture *Entity::GetTexture()
+{
+	return texture;
 }
 
 void Entity::InitComponents()

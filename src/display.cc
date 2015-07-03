@@ -20,6 +20,9 @@ Display::~Display()
 {
 	if (window != NULL)
 		SDL_DestroyWindow(window);
+
+	IMG_Quit();
+	SDL_Quit();
 }
 
 SDL_Window *Display::GetSDLWindow()
@@ -63,6 +66,13 @@ void Display::Init()
 	}
 
 	surface = SDL_GetWindowSurface(window);
+
+	// Image sub module
+	IMG_Init(IMG_INIT_PNG);
+
+	/*
+	* TODO: Add more flags / maybe init in separate system
+	*/
 }
 
 Display &Display::operator=(Display &&other)

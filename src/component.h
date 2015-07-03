@@ -5,12 +5,20 @@
 #include "game.h"
 #include "entity.h"
 #include <cassert>
+#include <iostream>
+
+using namespace std;
 
 class Component
 {
 private:
 	Game *game;
 	Entity *entity;
+
+	string failureDetail;
+
+protected:
+	void PushError(string failureDetail);
 
 public:
 	Component();
@@ -24,13 +32,15 @@ public:
 	
 	template <typename T>
 	T *AddComponent();
-	
+
 	template <typename Derived>
 	Derived *GetComponent();
 
 	void SetDrawColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a = 255);
+
+	string GetError();
 	
-	virtual void Init();
+	virtual bool Init();
 };
 
 #endif

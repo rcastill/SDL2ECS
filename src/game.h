@@ -7,6 +7,7 @@
 #include "entity.h"
 #include "display.h"
 #include "time.h"
+#include "texture.h"
 #include <vector>
 #include <cassert>
 

@@ -4,6 +4,16 @@ Component::Component() : game(NULL), entity(NULL)
 {
 }
 
+void Component::PushError(string failureDetail)
+{
+	this->failureDetail = failureDetail;
+}
+
+void Component::GetError()
+{
+	return failureDetail;
+}
+
 void Component::SetGame(Game *game)
 {
 	if (this->game == NULL)

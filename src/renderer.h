@@ -4,6 +4,8 @@
 #include <SDL2/SDL.h>
 #include "system.h"
 #include "display.h"
+#include "entity.h"
+#include "texture.h"
 
 #define DEFAULT_DRAW_COLOR_R 0xff
 #define DEFAULT_DRAW_COLOR_G 0x00
@@ -18,6 +20,12 @@ private:
 public:
 	Renderer(Display *display, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
 	Renderer(Display *display);
+
+	~Renderer();
+
+	SDL_Texture *CreateTexture(SDL_Surface *surface);
+
+	void RenderTextures();
 
 	void SetDrawColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a = 255);
 };

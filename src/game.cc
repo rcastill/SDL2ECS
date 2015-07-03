@@ -74,8 +74,18 @@ void Game::Instantiate()
 
 void Game::Start()
 {
+	assert(renderer != NULL);
+
+	// Load Textures
+	for (unsigned int i = 0; i < entities.size(); i++) {
+		Texture *texture = entities[i]->GetTexture();
+
+		if (texture != NULL)
+			texture->Load(renderer, entities[i]);
+	}
+
 	// Initialize entities
-	for (int i = 0; i < entities.size(); i++) {
+	for (unsigned int i = 0; i < entities.size(); i++) {
 		entities[i]->SetGame(this);
 		entities[i]->Init();
 	}
@@ -89,12 +99,7 @@ void Game::Start()
 			for (unsigned int i = 0; i < components.size(); i++)
 				components[i]->OnUpdate();
 		}
-
 	}
-
-
-
-
 }
 
 vector<Entity*> &Game::GetEntities()
