@@ -43,7 +43,10 @@ public:
 
 	void SetEnabled(bool enabled);
 
+    SDL_Rect *GetSDLRect();
 	operator SDL_Rect*();
+
+    friend ostream &operator << (ostream &stream, Transform &transform);
 };
 
 ostream &operator << (ostream &stream, Transform &transform);

@@ -8,6 +8,8 @@
 #include "texture.h"
 #include <iostream>
 
+using namespace std;
+
 #define DEFAULT_DRAW_COLOR_R 255
 #define DEFAULT_DRAW_COLOR_G 0
 #define DEFAULT_DRAW_COLOR_B 0

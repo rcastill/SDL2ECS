@@ -47,13 +47,21 @@ IntegerProperty &IntegerProperty::operator=(int other)
 	return *this;
 }
 
-Transform::Transform() : x(&rect.x), y(&rect.y), w(&rect.w), h(&rect.h), r(&rotation)
+Transform::Transform() : x(&rect.x), y(&rect.y), w(&rect.w), h(&rect.h), r(&rotation), enabled(true)
 {
 }
 
 void Transform::SetEnabled(bool enabled)
 {
 	this->enabled = enabled;
+}
+
+SDL_Rect *Transform::GetSDLRect()
+{
+    if (enabled)
+        return &rect;
+
+    return NULL;
 }
 
 Transform::operator SDL_Rect*()
@@ -66,10 +74,10 @@ Transform::operator SDL_Rect*()
 
 ostream &operator << (ostream &stream, Transform &transform)
 {
-	int x = transform.x;
-	int y = transform.y;
-	int w = transform.w;
-	int h = transform.h;
+	int x = transform.rect.x;
+	int y = transform.rect.y;
+	int w = transform.rect.w;
+	int h = transform.rect.h;
 	int r = transform.r;
 
 	return stream << "{x: " << x << ", y: " << y << ", w: " << w << ", h: " << h << ", r: " << r << "}";

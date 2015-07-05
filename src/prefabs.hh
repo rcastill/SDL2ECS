@@ -11,7 +11,8 @@ public:
 	void Init()
     {
         // FIX IT
-        AddComponent(new WASDController);
-        //AddComponent<WASDController>();
+        //AddComponent(new WASDController);
+        SetTexture("mario.png");
+        AddComponent<WASDController>();
     }
 };

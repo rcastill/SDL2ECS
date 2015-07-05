@@ -32,6 +32,7 @@ public:
 	bool Load(Renderer *renderer, Entity *entity);
 
 	SDL_Rect *GetFrame();
+    SDL_Texture *GetSDLTexture();
 
 	int GetWidth();
 	int GetHeight();

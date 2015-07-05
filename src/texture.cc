@@ -1,6 +1,6 @@
 #include "texture.h"
 
-Texture::Texture(string ppath) : path(ppath), texture(NULL)
+Texture::Texture(string ppath) : path(ppath), texture(NULL), frame(NULL)
 {
 }
 
@@ -31,6 +31,11 @@ bool Texture::Load(Renderer *renderer, Entity *entity)
 SDL_Rect *Texture::GetFrame()
 {
 	return frame;
+}
+
+SDL_Texture *Texture::GetSDLTexture()
+{
+    return texture;
 }
 
 int Texture::GetWidth()
