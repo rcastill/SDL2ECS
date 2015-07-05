@@ -2,6 +2,7 @@
 #define WASDCONTROLLER_H
 
 #include "component.h"
+#include <iostream>
 
 class WASDController : public Component
 {

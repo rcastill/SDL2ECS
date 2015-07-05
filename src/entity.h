@@ -32,6 +32,9 @@ public:
 
 	Transform &GetTransform();
 
+    // FIX IT
+    void AddComponent(Component *compoenent);
+
 	template <typename T>
 	T *AddComponent();
 
@@ -45,4 +48,30 @@ public:
 	void InitComponents();
 };
 
-#endif
+#ifndef LIBCOMPILE
+
+template <typename Derived>
+Derived *Entity::GetComponent()
+{
+	for (unsigned int i = 0; i < components.size(); i++) {
+		Derived *cast = dynamic_cast<Derived *>(components[i]);
+
+		if (cast != 0)
+			return cast;
+	}
+
+	return NULL;
+}
+
+template <typename T>
+T *Entity::AddComponent()
+{
+	T *component = new T;
+	component->SetEntity(this);
+	components.push_back(component);
+	return component;
+}
+
+#endif // LIBCOMPILE
+
+#endif // ENTITY_H

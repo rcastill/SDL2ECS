@@ -54,6 +54,7 @@ public:
 	Input *GetInput();
 
 	void Start();
+    void Stop();
 };
 
 #endif

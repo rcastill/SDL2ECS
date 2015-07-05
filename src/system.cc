@@ -4,6 +4,10 @@ System::System() : game(NULL), setFailure(false)
 {
 }
 
+void System::Init()
+{
+}
+
 void System::SetGame(Game *game)
 {
 	if (this->game == NULL)

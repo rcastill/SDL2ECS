@@ -13,12 +13,21 @@ Entity::~Entity()
 		delete texture;
 }
 
+void Entity::Init()
+{
+}
+
 vector<Component*>& Entity::GetComponents()
 {
 	return components;
 }
 
-template <typename Derived>
+void Entity::AddComponent(Component *component)
+{
+    components.push_back(component);
+}
+
+/*template <typename Derived>
 Derived *Entity::GetComponent()
 {
 	for (unsigned int i = 0; i < components.size(); i++) {
@@ -38,7 +47,7 @@ T *Entity::AddComponent()
 	component->SetEntity(this);
 	components.push_back(component);
 	return component;
-}
+}*/
 
 void Entity::SetGame(Game *game)
 {
@@ -61,6 +70,7 @@ void Entity::InitComponents()
 {
 	for (unsigned int i = 0; i < components.size(); i++) {
 		components[i]->SetGame(game);
+        components[i]->SetEntity(this);
 		components[i]->Init();
 	}
 }

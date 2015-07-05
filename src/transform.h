@@ -46,6 +46,6 @@ public:
 	operator SDL_Rect*();
 };
 
-ostream &operator << (ostream &stream, const Transform &transform);
+ostream &operator << (ostream &stream, Transform &transform);
 
 #endif

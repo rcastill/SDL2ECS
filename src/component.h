@@ -26,7 +26,7 @@ protected:
 
 public:
 	Component();
-	~Component();
+	virtual ~Component();
 
 	void SetGame(Game *game);
 	void SetEntity(Entity *entity);
@@ -48,9 +48,36 @@ public:
 	bool GetKeyPressed(SDL_Keycode key);
 
 	string GetError();
+
+    void Stop();
 	
 	virtual bool Init();
 	virtual void Update();
 };
 
-#endif
+#ifndef LIBCOMPILE
+
+template <typename T>
+void Component::Instantiate()
+{
+	assert(game != NULL);
+	game->Instantiate<T>();
+}
+
+template <typename T>
+T *Component::AddComponent()
+{
+	assert(entity != NULL);
+	return entity->AddComponent<T>();
+}
+
+template <typename Derived>
+Derived *Component::GetComponent()
+{
+	assert(entity != NULL);
+	return entity->GetComponent<Derived>();
+}
+
+#endif // LIBCOMPILE
+
+#endif // COMPONENT_H

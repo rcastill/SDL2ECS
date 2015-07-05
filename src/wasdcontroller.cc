@@ -4,6 +4,7 @@ WASDController::WASDController() {}
 
 bool WASDController::Init()
 {
+    return true;
 }
 
 void WASDController::Update()

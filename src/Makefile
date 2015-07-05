@@ -1,40 +1,55 @@
-all: main
+CC=clang++
+INC=-I/usr/include
+CFLAGS=-std=c++11 -lSDL2 -lSDL2_image
+LIBNAME=sdl2ecs.a
+LIBOBJS=component.o display.o entity.o game.o input.o renderer.o system.o texture.o time.o transform.o
+
+all: test
 
 main:
-	g++ -o main main.cc
+	clang++ -o main main.cc $(LIBNAME) $(CFLAGS)
+
+test:
+	clang++ -o test test.cc $(INC) $(CFLAGS)
+
+lib: component display entity game input renderer system texture time transform
+	ar rcs $(LIBNAME) $(LIBOBJS)
 
 component:
-	g++ -c component.cc -lSDL2
+	clang++ -c component.cc
 
 display:
-	g++ -c display.cc -lSDL2
+	clang++ -c display.cc
 
 entity:
-	g++ -c entity.cc
+	clang++ -c entity.cc -DLIBCOMPILE
 
-game: 
-	g++ -c game.cc -lSDL2
+game:
+	clang++ -c game.cc -DLIBCOMPILE
 
 input:
-	g++ -c input.cc -lSDL2
+	clang++ -c input.cc
 
 prefabs:
-	g++ -c prefabs.cc
+	clang++ -c prefabs.cc
 
 renderer:
-	g++ -c renderer.cc -lSDL2 -std=c++11
+	clang++ -c renderer.cc $(CFLAGS) -DLIBCOMPILE
 
 system:
-	g++ -c system.cc
+	clang++ -c system.cc
 
 texture:
-	g++ -c texture.cc -lSDL2 -lSDL2_image
+	clang++ -c texture.cc -DLIBCOMPILE
 
 time:
-	g++ -c time.cc -lSDL2
+	clang++ -c time.cc
 
 transform:
-	g++ -c transform.cc -lSDL2
+	clang++ -c transform.cc
 
 wasdcontroller:
-	g++ -c wasdcontroller.cc
+	clang++ -c wasdcontroller.cc
+
+clean:
+	rm -f *.o

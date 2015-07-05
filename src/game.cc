@@ -78,11 +78,27 @@ void Game::Instantiate()
 
 void Game::Start()
 {
+
 	// Initiate display
 	display->Init();
 
+    if (display->Check()) {
+        cout << "Display error: " << display->GetError() << endl;
+        return;
+    }
+
 	// Initiate input system
 	input->Init();
+
+    // Initiate renderer
+    renderer->Init();
+
+    if (renderer->Check()) {
+        cout << "Renderer error: " << renderer->GetError() << endl;
+        return;
+    }
+
+    renderer->SetGame(this);
 
 	// Initialize entities
 	for (unsigned int i = 0; i < entities.size(); i++) {
@@ -117,9 +133,23 @@ void Game::Start()
 				components[i]->Update();
 		}
 
+        // Clear screen
+        renderer->Clear();
+
+        // Render textures
+        renderer->RenderTextures();
+
+        // Update screen
+        renderer->Update();
+
 		// Reset events
 		input->Reset();
 	}
+}
+
+void Game::Stop()
+{
+    running = false;
 }
 
 vector<Entity*> &Game::GetEntities()

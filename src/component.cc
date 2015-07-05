@@ -4,6 +4,19 @@ Component::Component() : game(NULL), entity(NULL)
 {
 }
 
+Component::~Component()
+{
+}
+
+bool Component::Init()
+{
+    return true;
+}
+
+void Component::Update()
+{
+}
+
 Transform &Component::GetTransform()
 {
 	assert(entity != NULL);
@@ -32,7 +45,7 @@ void Component::SetEntity(Entity *entity)
 		this->entity = entity;
 }
 
-template <typename T>
+/*template <typename T>
 void Component::Instantiate()
 {
 	assert(game != NULL);
@@ -51,7 +64,7 @@ Derived *Component::GetComponent()
 {
 	assert(entity != NULL);
 	return entity->GetComponent<Derived>();
-}
+}*/
 
 void Component::SetDrawColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
@@ -79,3 +92,10 @@ bool Component::GetKeyPressed(SDL_Keycode key)
 	assert(input != NULL);
 	return input->GetKeyPressed(key);
 }
+
+void Component::Stop()
+{
+    assert(game != NULL);
+    game->Stop();
+}
+

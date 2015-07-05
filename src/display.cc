@@ -59,7 +59,7 @@ void Display::Init()
 		return;
 	}
 
-	surface = SDL_GetWindowSurface(window);
+	//surface = SDL_GetWindowSurface(window);
 
 	// Image sub module
 	IMG_Init(IMG_INIT_PNG);

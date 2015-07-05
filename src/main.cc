@@ -1,7 +1,7 @@
 #include <iostream>
 
-#include "game.h"
-#include "prefabs.h"
+#include "sdl2ecs.h"
+#include "prefabs.hh"
 
 using namespace std;
 
@@ -12,12 +12,14 @@ int main(int argc, char const *argv[])
 
 	// Load systems
 	game.LoadDisplay("SDL2", 800, 600);
+ 
 	//game.LoadTimeController(60);
 	game.LoadRenderer();
 	game.LoadInput();
 
 	// Load entities
-	game.Instantiate<Player>();
+	//game.Instantiate<Player>(); FIX IT
+    game.AddEntity(new Player());
 
 	// Run
 	game.Start();

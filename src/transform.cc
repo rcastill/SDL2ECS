@@ -1,5 +1,7 @@
 #include "transform.h"
 
+
+
 IntegerProperty::IntegerProperty(int *pinteger) : integer(pinteger)
 {
 }
