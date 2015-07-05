@@ -14,6 +14,7 @@
 #include <cassert>
 
 class Entity;
+class Time;
 
 using namespace std;
 
@@ -25,9 +26,11 @@ private:
 	vector<Entity*> entities;
 
 	Display *display;
-	Time *timeController;
+	Time *time;
 	Renderer *renderer;
 	Input *input;
+
+    Uint32 frameCount;
 
 public:
 	Game();
@@ -49,12 +52,21 @@ public:
 	vector<Entity*> &GetEntities();
 
 	Display *GetDisplay();
-	Time *GetTimeController();
+	Time *GetTime();
 	Renderer *GetRenderer();
 	Input *GetInput();
+
+    Uint32 GetFrameCount();
 
 	void Start();
     void Stop();
 };
+
+template <typename T>
+void Game::Instantiate()
+{
+	T *entity = new T;
+	AddEntity(entity);
+}
 
 #endif

@@ -43,7 +43,7 @@ texture:
 	clang++ -c texture.cc -DLIBCOMPILE
 
 time:
-	clang++ -c time.cc
+	clang++ -c time.cc -DLIBCOMPILE
 
 transform:
 	clang++ -c transform.cc

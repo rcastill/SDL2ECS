@@ -3,17 +3,26 @@
 
 #include "SDL2/SDL.h"
 #include "system.h"
+#include "game.h"
+#include <cassert>
 
 class Time : public System
 {
 private:
-	double frameTime;
+    Uint32 startTime;
+    Uint32 frameTime;
+    Uint32 timePerFrame;
 
 public:
-	Time();
-	Time(double frameRate);
+    Time(int fps = 60);
 
-	double GetFrameTime() const;
+    void Init();
+    Uint32 GetElapsed();
+    float GetFPS();
+
+    // Caps frame rate as necessary
+    void Update();
+    void CapFrameRate();
 };
 
 #endif

@@ -45,26 +45,11 @@ void Component::SetEntity(Entity *entity)
 		this->entity = entity;
 }
 
-/*template <typename T>
-void Component::Instantiate()
+Time &Component::GetTimeSystem()
 {
-	assert(game != NULL);
-	game->Instantiate<T>();
+    assert(game != NULL);
+    return *game->GetTime();
 }
-
-template <typename T>
-T *Component::AddComponent()
-{
-	assert(entity != NULL);
-	return entity->AddComponent<T>();
-}
-
-template <typename Derived>
-Derived *Component::GetComponent()
-{
-	assert(entity != NULL);
-	return entity->GetComponent<Derived>();
-}*/
 
 void Component::SetDrawColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {

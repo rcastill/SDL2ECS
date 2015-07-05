@@ -1,6 +1,6 @@
 #include "game.h"
 
-Game::Game() : running(true), display(NULL), timeController(NULL), renderer(NULL), input(NULL)
+Game::Game() : running(true), display(NULL), time(NULL), renderer(NULL), input(NULL), frameCount(0)
 {
 }
 
@@ -12,8 +12,8 @@ Game::~Game()
 	if (display != NULL)
 		delete display;
 
-	if (timeController != NULL)
-		delete timeController;
+	if (time != NULL)
+		delete time;
 
 	if (renderer != NULL)
 		delete renderer;
@@ -22,11 +22,6 @@ Game::~Game()
 Display *Game::GetDisplay()
 {
 	return display;
-}
-
-Time *Game::GetTimeController()
-{
-	return timeController;
 }
 
 Renderer *Game::GetRenderer()
@@ -39,6 +34,16 @@ Input *Game::GetInput()
 	return input;
 }
 
+Uint32 Game::GetFrameCount()
+{
+    return frameCount;
+}
+
+Time *Game::GetTime()
+{
+    return time;
+}
+
 void Game::LoadDisplay(string title, int width, int height)
 {
 	display = new Display(title, width, height);
@@ -46,7 +51,7 @@ void Game::LoadDisplay(string title, int width, int height)
 
 void Game::LoadTimeController(double frameRate)
 {
-	timeController = new Time(frameRate);
+	time = new Time(frameRate);
 }
 
 void Game::LoadRenderer()
@@ -69,16 +74,8 @@ void Game::AddEntity(Entity *entity)
 	entities.push_back(entity);
 }
 
-template <typename T>
-void Game::Instantiate()
-{
-	T *entity = new T;
-	AddEntity(entity);
-}
-
 void Game::Start()
 {
-
 	// Initiate display
 	display->Init();
 
@@ -120,7 +117,15 @@ void Game::Start()
 	for (unsigned int i = 0; i < entities.size(); i++)
 		entities[i]->InitComponents();
 
+    assert(time != NULL);
+
+    time->SetGame(this);
+    time->Init();
+
 	while (running) {
+        // Notify new iteration
+        time->Update();
+
 		// Update events
 		input->PollEvents();
 
@@ -142,8 +147,14 @@ void Game::Start()
         // Update screen
         renderer->Update();
 
+        // Update frameCount
+        frameCount++;
+
 		// Reset events
 		input->Reset();
+
+        // Cap frame rate
+        time->CapFrameRate();
 	}
 }
 

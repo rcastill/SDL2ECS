@@ -5,11 +5,13 @@
 #include "game.h"
 #include "entity.h"
 #include "input.h"
+#include "time.h"
 #include <cassert>
 #include <iostream>
 #include "transform.h"
 
 class Entity;
+class Time;
 
 using namespace std;
 
@@ -41,6 +43,8 @@ public:
 
 	template <typename Derived>
 	Derived *GetComponent();
+
+    Time &GetTimeSystem();
 
 	void SetDrawColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a = 255);
 

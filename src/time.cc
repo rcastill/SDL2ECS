@@ -1,15 +1,35 @@
 #include "time.h"
 
-Time::Time()
+Time::Time(int fps) : timePerFrame((int) 1000.0f / fps)
 {
 }
 
-Time::Time(double frameRate)
+void Time::Init()
 {
-	frameTime = 1.0 / frameRate;
+    startTime = SDL_GetTicks();
 }
 
-double Time::GetFrameTime() const
+Uint32 Time::GetElapsed()
 {
-	return frameTime;
+    return SDL_GetTicks() - startTime;
 }
+
+float Time::GetFPS()
+{
+    assert(game != NULL);
+    return game->GetFrameCount() / (GetElapsed() / 1000.0f);
+}
+
+void Time::Update()
+{
+    frameTime = SDL_GetTicks();
+}
+
+void Time::CapFrameRate()
+{
+    frameTime = SDL_GetTicks() - frameTime;
+
+    if (frameTime < timePerFrame)
+        SDL_Delay(timePerFrame - frameTime);
+}    
+

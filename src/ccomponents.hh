@@ -23,6 +23,11 @@ public:
                 cout << wasdcontroller << " == " << this << endl;
             }
 
+            if (GetKeyDown(SDLK_f)) {
+                float fps = GetTimeSystem().GetFPS();
+                cout << "FPS: " << fps << endl;
+            }
+
             Transform &transform = GetTransform();
 
             if (GetKeyPressed(SDLK_d))
