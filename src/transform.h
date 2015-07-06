@@ -16,10 +16,10 @@ public:
 
 	operator int();	
 
-	IntegerProperty	&operator+=(int other);
-	IntegerProperty &operator-=(int other);
-	IntegerProperty &operator*=(int other);
-	IntegerProperty &operator/=(int other);
+	IntegerProperty	&operator+=(double other);
+	IntegerProperty &operator-=(double other);
+	IntegerProperty &operator*=(double other);
+	IntegerProperty &operator/=(double other);
 	IntegerProperty &operator%=(int other);
 	IntegerProperty &operator=(int other);
 };

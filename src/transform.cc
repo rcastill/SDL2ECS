@@ -1,7 +1,5 @@
 #include "transform.h"
 
-
-
 IntegerProperty::IntegerProperty(int *pinteger) : integer(pinteger)
 {
 }
@@ -11,27 +9,27 @@ IntegerProperty::operator int()
 	return *integer;
 }
 	
-IntegerProperty	&IntegerProperty::operator+=(int other)
+IntegerProperty	&IntegerProperty::operator+=(double other)
 {
-	*integer += other;
+    *integer = (int) (*integer + other);
 	return *this;
 }
 
-IntegerProperty &IntegerProperty::operator-=(int other)
+IntegerProperty &IntegerProperty::operator-=(double other)
 {
-	*integer -= other;
+    *integer = (int) (*integer - other);
 	return *this;
 }
 
-IntegerProperty &IntegerProperty::operator*=(int other)
+IntegerProperty &IntegerProperty::operator*=(double other)
 {
-	*integer *= other;
+	*integer = (int) (*integer * other);
 	return *this;
 }
 
-IntegerProperty &IntegerProperty::operator/=(int other)
+IntegerProperty &IntegerProperty::operator/=(double other)
 {
-	*integer /= other;
+    *integer = (int) (*integer / other);
 	return *this;
 }
 

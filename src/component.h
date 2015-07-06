@@ -51,6 +51,8 @@ public:
 	bool GetKeyDown(SDL_Keycode key);
 	bool GetKeyPressed(SDL_Keycode key);
 
+    void GetMousePos(int &x, int &y);
+
 	string GetError();
 
     void Stop();

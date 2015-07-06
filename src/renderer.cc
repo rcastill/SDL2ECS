@@ -62,8 +62,8 @@ void Renderer::RenderTextures()
         //cout << entities[i]->GetTransform() << endl;
 
 		if (texture != NULL) {
-            //SDL_RenderCopyEx(renderer, texture->GetSDLTexture(), texture->GetFrame(), entities[i]->GetTransform().GetSDLRect(), 0, NULL, SDL_FLIP_NONE);
-			SDL_RenderCopy(renderer, texture->GetSDLTexture(), texture->GetFrame(), entities[i]->GetTransform());
+            SDL_RenderCopyEx(renderer, texture->GetSDLTexture(), texture->GetFrame(), entities[i]->GetTransform().GetSDLRect(), entities[i]->GetTransform().r, NULL, SDL_FLIP_NONE);
+			//SDL_RenderCopy(renderer, texture->GetSDLTexture(), texture->GetFrame(), entities[i]->GetTransform());
         }
 	}
 }

@@ -4,15 +4,21 @@
 class Player : public Entity
 {
 public:
-	Player()
-    {
-    }
-	
 	void Init()
     {
-        // FIX IT
-        //AddComponent(new WASDController);
         SetTexture("mario.png");
+        
         AddComponent<WASDController>();
+        AddComponent<Zoomer>();
+        AddComponent<Rotator>();
     }
+};
+
+class GlobalBehaviours : public Entity
+{
+    public:
+        void Init()
+        {
+            AddComponent<GlobalInputManager>();
+        }
 };

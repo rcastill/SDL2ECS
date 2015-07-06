@@ -46,6 +46,11 @@ bool Input::GetKeyPressed(SDL_Keycode key)
 	return keyboardState[scancode];
 }
 
+void Input::GetMousePos(int &x, int &y)
+{
+    SDL_GetMouseState(&x, &y);
+}
+
 void Input::Reset()
 {
 	for (unsigned int i = 0; i < keydownReset.size(); i++)

@@ -78,6 +78,15 @@ bool Component::GetKeyPressed(SDL_Keycode key)
 	return input->GetKeyPressed(key);
 }
 
+void Component::GetMousePos(int &x, int &y)
+{
+    assert(game != NULL);
+    Input *input = game->GetInput();
+
+    assert(input != NULL);
+    input->GetMousePos(x, y);
+}
+
 void Component::Stop()
 {
     assert(game != NULL);

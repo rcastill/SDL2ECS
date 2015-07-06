@@ -19,6 +19,7 @@ int main(int argc, char const *argv[])
 
 	// Load entities
 	game.Instantiate<Player>();
+    game.Instantiate<GlobalBehaviours>();
 
 	// Run
 	game.Start();
