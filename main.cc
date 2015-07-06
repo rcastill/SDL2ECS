@@ -1,13 +1,9 @@
-#include <iostream>
-
-#include "sdl2ecs.h"
+#include "api/include/sdl2ecs.h"
 #include "prefabs.hh"
-
-using namespace std;
 
 int main(int argc, char const *argv[])
 {
-	// Instantiate Game
+ 	// Instantiate Game
 	Game game;
 
 	// Load systems
