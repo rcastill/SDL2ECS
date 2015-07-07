@@ -13,12 +13,15 @@ private:
     Uint32 frameTime;
     Uint32 timePerFrame;
 
+    float deltaTime;
+
 public:
     Time(int fps = 60);
 
     void Init();
     Uint32 GetElapsed();
     float GetFPS();
+    float GetDeltaTime();
 
     // Caps frame rate as necessary
     void Update();

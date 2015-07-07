@@ -87,6 +87,15 @@ void Component::GetMousePos(int &x, int &y)
     input->GetMousePos(x, y);
 }
 
+float Component::GetDeltaTime()
+{
+    assert(game != NULL);
+    Time *time = game->GetTime();
+
+    assert(time != NULL);
+    return time->GetDeltaTime();
+}
+
 void Component::Stop()
 {
     assert(game != NULL);

@@ -15,7 +15,9 @@ public:
         
 	void Update()
         {
-            
+            if (GetKeyDown(SDLK_p)) {
+                cout << GetDeltaTime() << endl;
+            }
 
             Transform &transform = GetTransform();
 

@@ -53,6 +53,8 @@ public:
 
     void GetMousePos(int &x, int &y);
 
+    float GetDeltaTime();
+
 	string GetError();
 
     void Stop();

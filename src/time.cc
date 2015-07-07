@@ -20,8 +20,15 @@ float Time::GetFPS()
     return game->GetFrameCount() / (GetElapsed() / 1000.0f);
 }
 
+float Time::GetDeltaTime()
+{
+    return deltaTime;
+}
+
+
 void Time::Update()
 {
+    deltaTime = frameTime / 1000.0f;
     frameTime = SDL_GetTicks();
 }
 
