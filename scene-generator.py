@@ -19,31 +19,32 @@ ifs.close()
 ecount = 0
 ccount = 0
 for prefab in decoded:
-    instance = 'e%d' %ecount
-    savetext = '%s *%s = ' %(prefab, instance)
+    for instance in decoded[prefab]:
+        instanceName = 'e%d' %ecount
+        savetext = '%s *%s = ' %(prefab, instanceName)
 
-    if len(decoded[prefab]) == 0:
-        savetext = ''
+        if len(instance) == 0:
+            savetext = ''
 
-    flines.append('%sgame.Instantiate<%s>();' %(savetext, prefab))
+        flines.append('%sgame.Instantiate<%s>();' %(savetext, prefab))
 
-    for component in decoded[prefab]:
-        if component == 'texture':
-            path = decoded[prefab][component]
-            flines.append('%s->SetTexture("%s");' %(instance, path))
+        for component in instance:
+            if component == 'texture':
+                path = instance[component]
+                flines.append('%s->SetTexture("%s");' %(instanceName, path))
 
-        else:
-            curComponent = 'c%d' %ccount
-            flines.append('%s *%s = %s->GetComponent<%s>();' %(component, curComponent, instance, component))
+            else:
+                curComponent = 'c%d' %ccount
+                flines.append('%s *%s = %s->GetComponent<%s>();' %(component, curComponent, instanceName, component))
 
-            for attribute in decoded[prefab][component]:
-                value = decoded[prefab][component][attribute]
-                flines.append('%s->%s = %s;' %(curComponent, attribute, str(value)))
+                for attribute in instance[component]:
+                    value = instance[component][attribute]
+                    flines.append('%s->%s = %s;' %(curComponent, attribute, str(value)))
 
-            ccount += 1
+                ccount += 1
 
-    if savetext != '':
-        ecount += 1
+        if savetext != '':
+            ecount += 1
 
 # Create main.scene file
 ofs = open('main.scene', 'w')

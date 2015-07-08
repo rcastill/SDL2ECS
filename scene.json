@@ -1,11 +1,13 @@
 {
-    "Player": {
-        "texture": "res/mario.png",
-            
-        "WASDController": {
-            "speed": 10
+    "Player": [
+        {
+            "texture": "res/mario.png",
+                
+            "WASDController": {
+                "speed": 10
+            }
         }
-    },
+    ],
 
-    "GlobalBehaviours": {}
+    "GlobalBehaviours": [{}]
 }
