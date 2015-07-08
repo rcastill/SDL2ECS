@@ -43,9 +43,7 @@ public:
 	template <typename Derived>
 	Derived *GetComponent();
 
-	virtual void Init();
-	
-	void InitComponents();
+	void Init();
 };
 
 #ifndef LIBCOMPILE

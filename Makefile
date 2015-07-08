@@ -3,12 +3,16 @@ SRCPATH=src/
 INCPATH=api/include/
 LIBPATH=api/lib/
 LDFLAGS=-lSDL2 -lSDL2_image -lsdl2ecs
-CFLAGS=-std=c++11 -L$(LIBPATH) -Wall
+CFLAGS=-std=c++11 -L$(LIBPATH) -Wall -Wunused-variable
 LIBNAME=libsdl2ecs.a
 LIBOBJS=component.o display.o entity.o game.o input.o renderer.o system.o texture.o time.o transform.o
 
 main:
+	./prefab-generator.py
+	./scene-generator.py
 	$(CC) $(CFLAGS) -o main main.cc $(LDFLAGS)
+	rm prefabs.hh
+	rm main.scene
 
 lib: component display entity game input renderer system texture time transform
 	ar rcs $(LIBNAME) $(LIBOBJS)

@@ -47,7 +47,7 @@ public:
 	void AddEntity(Entity *entity);
 
 	template <typename T>
-	void Instantiate();
+	T *Instantiate();
 
 	vector<Entity*> &GetEntities();
 
@@ -58,15 +58,19 @@ public:
 
     Uint32 GetFrameCount();
 
+    void Init();
+
 	void Start();
     void Stop();
 };
 
 template <typename T>
-void Game::Instantiate()
+T *Game::Instantiate()
 {
 	T *entity = new T;
+    entity->SetGame(this);
 	AddEntity(entity);
+    return entity;
 }
 
 #endif

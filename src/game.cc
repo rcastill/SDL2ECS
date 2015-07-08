@@ -76,7 +76,7 @@ void Game::AddEntity(Entity *entity)
 
 void Game::Start()
 {
-	// Initiate display
+    // Initiate display
 	display->Init();
 
     if (display->Check()) {
@@ -97,14 +97,6 @@ void Game::Start()
 
     renderer->SetGame(this);
 
-	// Initialize entities
-	for (unsigned int i = 0; i < entities.size(); i++) {
-		entities[i]->SetGame(this);
-		entities[i]->Init();
-	}
-
-	assert(renderer != NULL);
-
 	// Load Textures
 	for (unsigned int i = 0; i < entities.size(); i++) {
 		Texture *texture = entities[i]->GetTexture();
@@ -115,7 +107,7 @@ void Game::Start()
 
 	// Initialize components
 	for (unsigned int i = 0; i < entities.size(); i++)
-		entities[i]->InitComponents();
+		entities[i]->Init();
 
     assert(time != NULL);
 

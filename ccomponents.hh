@@ -4,13 +4,19 @@
 class WASDController : public Component
 {
 public:
+    int speed;
+
 	WASDController()
         {
+            // Default values            
+            speed = 10;
+
+
         }
         
 	bool Init()
         {
-            return true;
+                    return true;
         }
         
 	void Update()
@@ -22,16 +28,16 @@ public:
             Transform &transform = GetTransform();
 
             if (GetKeyPressed(SDLK_d))
-                transform.x += 10;
+                transform.x += speed;
 
             if (GetKeyPressed(SDLK_w))
-                transform.y -= 10;
+                transform.y -= speed;
 
             if (GetKeyPressed(SDLK_a))
-                transform.x -= 10;
+                transform.x -= speed;
 
             if (GetKeyPressed(SDLK_s))
-                transform.y += 10;
+                transform.y += speed;
 
             if (GetKeyDown(SDLK_v))
                 cout << transform << endl;

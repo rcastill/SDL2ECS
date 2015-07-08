@@ -13,9 +13,7 @@ int main(int argc, char const *argv[])
 	game.LoadRenderer();
 	game.LoadInput();
 
-	// Load entities
-	game.Instantiate<Player>();
-    game.Instantiate<GlobalBehaviours>();
+    #include "main.scene"
 
 	// Run
 	game.Start();

@@ -1,0 +1,5 @@
+{
+    "Player": ["WASDController", "Zoomer", "Rotator"],
+    "GlobalBehaviours": ["GlobalInputManager"]
+}
+
