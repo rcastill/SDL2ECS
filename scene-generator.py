@@ -18,6 +18,7 @@ ifs.close()
 # Generate main.scene lines
 ecount = 0
 ccount = 0
+tcount = 0
 for prefab in decoded:
     for instance in decoded[prefab]:
         instanceName = 'e%d' %ecount
@@ -32,6 +33,16 @@ for prefab in decoded:
             if component == 'texture':
                 path = instance[component]
                 flines.append('%s->SetTexture("%s");' %(instanceName, path))
+
+            elif component == 'transform':
+                curTransform = 't%d' %tcount
+                flines.append('Transform &%s = %s->GetTransform();' %(curTransform, instanceName))
+
+                for attribute in instance[component]:
+                    value = instance[component][attribute]
+                    flines.append('%s.%s = %s;' %(curTransform, attribute, str(value)))
+
+                tcount += 1
 
             else:
                 curComponent = 'c%d' %ccount

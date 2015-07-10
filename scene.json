@@ -2,6 +2,11 @@
     "Player": [
         {
             "texture": "res/mario.png",
+
+            "transform": {
+                "x": 300,
+                "r": 270
+            },
                 
             "WASDController": {
                 "speed": 10
