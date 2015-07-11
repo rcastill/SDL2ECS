@@ -1,6 +1,6 @@
 #include "game.h"
 
-Game::Game() : running(true), display(NULL), time(NULL), renderer(NULL), input(NULL), frameCount(0)
+Game::Game() : running(false), display(NULL), time(NULL), renderer(NULL), input(NULL), frameCount(0)
 {
 }
 
@@ -71,6 +71,9 @@ void Game::LoadInput()
 
 void Game::AddEntity(Entity *entity)
 {
+    if (running)
+        entity->Init(this);
+
 	entities.push_back(entity);
 }
 
@@ -107,12 +110,15 @@ void Game::Start()
 
 	// Initialize components
 	for (unsigned int i = 0; i < entities.size(); i++)
-		entities[i]->Init();
+		entities[i]->Init(this);
 
     assert(time != NULL);
 
     time->SetGame(this);
     time->Init();
+
+    // Game is now running
+    running = true;
 
 	while (running) {
         // Notify new iteration

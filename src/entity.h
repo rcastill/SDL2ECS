@@ -15,7 +15,6 @@ using namespace std;
 class Entity
 {
 private:
-	Game *game;
 	Texture *texture;
 	vector<Component *> components;
 
@@ -25,8 +24,6 @@ public:
 	Entity();
 	virtual ~Entity();
 
-	void SetGame(Game *game);
-	
 	void SetTexture(string path);
 	Texture *GetTexture();
 
@@ -43,7 +40,7 @@ public:
 	template <typename Derived>
 	Derived *GetComponent();
 
-	void Init();
+	void Init(Game *game);
 };
 
 #ifndef LIBCOMPILE

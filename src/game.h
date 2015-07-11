@@ -68,7 +68,6 @@ template <typename T>
 T *Game::Instantiate()
 {
 	T *entity = new T;
-    entity->SetGame(this);
 	AddEntity(entity);
     return entity;
 }

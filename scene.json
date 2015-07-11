@@ -4,8 +4,8 @@
             "texture": "res/mario.png",
 
             "transform": {
-                "x": 300,
-                "r": 270
+                "x": 200,
+                "y": 100
             },
                 
             "WASDController": {

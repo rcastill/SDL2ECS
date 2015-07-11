@@ -22,7 +22,7 @@ public:
 	Display();
 	Display(string title, int width, int height);
 
-	~Display();
+	virtual ~Display();
 
 	void Init();
 
