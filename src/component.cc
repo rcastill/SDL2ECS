@@ -45,6 +45,11 @@ void Component::SetEntity(Entity *entity)
 		this->entity = entity;
 }
 
+Entity *Component::GetEntity()
+{
+    return entity;
+}
+
 Time &Component::GetTimeSystem()
 {
     assert(game != NULL);

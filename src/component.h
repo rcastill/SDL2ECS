@@ -33,6 +33,8 @@ public:
 	void SetGame(Game *game);
 	void SetEntity(Entity *entity);
 
+    Entity *GetEntity();
+
 	Transform &GetTransform();
 
 	template <typename T>
