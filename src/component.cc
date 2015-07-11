@@ -23,12 +23,12 @@ Transform &Component::GetTransform()
 	return entity->GetTransform();
 }
 
-void Component::PushError(string failureDetail)
+void Component::PushError(std::string failureDetail)
 {
 	this->failureDetail = failureDetail;
 }
 
-string Component::GetError()
+std::string Component::GetError()
 {
 	return failureDetail;
 }
@@ -105,5 +105,50 @@ void Component::Stop()
 {
     assert(game != NULL);
     game->Stop();
+}
+
+Camera *Component::CreateCamera(std::string name)
+{
+    assert(game != NULL);
+    Renderer *renderer = game->GetRenderer();
+
+    assert(renderer != NULL);
+    return renderer->CreateCamera(name);
+}
+
+Camera *Component::GetCamera(std::string name)
+{
+    assert(game != NULL);
+    Renderer *renderer = game->GetRenderer();
+
+    assert(renderer != NULL);
+    return renderer->GetCamera(name);
+}
+
+void Component::SetActiveCamera(Camera *camera)
+{
+    assert(game != NULL);
+    Renderer *renderer = game->GetRenderer();
+
+    assert(renderer != NULL);
+    return renderer->SetActiveCamera(camera);
+}
+
+void Component::SetActiveCamera(std::string name)
+{
+    assert(game != NULL);
+    Renderer *renderer = game->GetRenderer();
+
+    assert(renderer != NULL);
+    return renderer->SetActiveCamera(name);
+}
+
+void Component::DestroyCamera(std::string name)
+{
+    assert(game != NULL);
+    Renderer *renderer = game->GetRenderer();
+
+    assert(renderer != NULL);
+    return renderer->DestroyCamera(name);
 }
 
