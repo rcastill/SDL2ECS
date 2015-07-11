@@ -7,8 +7,8 @@
 #include "entity.h"
 #include "texture.h"
 #include <iostream>
-
-using namespace std;
+#include <vector>
+#include "camera.h"
 
 #define DEFAULT_DRAW_COLOR_R 255
 #define DEFAULT_DRAW_COLOR_G 0
@@ -26,6 +26,9 @@ private:
     Uint8 drawB;
     Uint8 drawA;
 
+    Camera *activeCamera;
+    std::vector<Camera*> cameras;
+
 public:
 	Renderer(Display *display, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
 	Renderer(Display *display);
@@ -41,6 +44,16 @@ public:
     void Update();
 
 	void SetDrawColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a = 255);
+
+    bool CameraExists(std::string name);
+
+    Camera *CreateCamera(std::string name);
+    Camera *GetCamera(std::string name);
+
+    void SetActiveCamera(Camera *camera);
+    void SetActiveCamera(std::string name);
+
+    void DestroyCamera(std::string name);
 };
 
 #endif

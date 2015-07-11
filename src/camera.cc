@@ -1,6 +1,6 @@
 #include "camera.h"
 
-Camera::Camera(std::string pname) : name(pname), followed(NULL)
+Camera::Camera(std::string pname) : name(pname), followed(NULL), x(0), y(0), w(0), h(0)
 {
 }
 
