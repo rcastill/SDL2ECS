@@ -8,12 +8,15 @@
 #include "texture.h"
 #include <iostream>
 #include <vector>
+#include <map>
 #include "camera.h"
 
 #define DEFAULT_DRAW_COLOR_R 255
 #define DEFAULT_DRAW_COLOR_G 0
 #define DEFAULT_DRAW_COLOR_B 0
 #define DEFAULT_DRAW_COLOR_A 255
+
+class Camera;
 
 class Renderer : public System
 {
@@ -27,7 +30,7 @@ private:
     Uint8 drawA;
 
     Camera *activeCamera;
-    std::vector<Camera*> cameras;
+    std::map<std::string, Camera> cameras;
 
 public:
 	Renderer(Display *display, Uint8 r, Uint8 g, Uint8 b, Uint8 a);

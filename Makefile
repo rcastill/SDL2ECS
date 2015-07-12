@@ -3,9 +3,9 @@ SRCPATH=src/
 INCPATH=api/include/
 LIBPATH=api/lib/
 LDFLAGS=-lSDL2 -lSDL2_image -lsdl2ecs
-CFLAGS=-std=c++11 -L$(LIBPATH) -Wall -Wunused-variable
+CFLAGS=-std=c++11 -L$(LIBPATH) -Wall
 LIBNAME=libsdl2ecs.a
-LIBOBJS=component.o display.o entity.o game.o input.o renderer.o system.o texture.o time.o transform.o
+LIBOBJS=camera.o component.o display.o entity.o game.o input.o renderer.o system.o texture.o time.o transform.o
 
 main:
 	./prefab-generator.py
@@ -14,12 +14,15 @@ main:
 	rm prefabs.hh
 	rm main.scene
 
-lib: component display entity game input renderer system texture time transform
+lib: camera component display entity game input renderer system texture time transform
 	ar rcs $(LIBNAME) $(LIBOBJS)
 	rm -f *.o
 	mv $(LIBNAME) $(LIBPATH)
 	rm -f $(INCPATH)*.h
 	cp $(SRCPATH)*.h $(INCPATH)
+
+camera:
+	$(CC) -c $(SRCPATH)camera.cc -DLIBCOMPILE
 
 component:
 	$(CC) -c $(SRCPATH)component.cc
@@ -63,7 +66,6 @@ time:
 
 transform:
 	$(CC) -c $(SRCPATH)transform.cc
-
 
 clean:
 	rm -f $(LIBPATH)$(LIBNAME)

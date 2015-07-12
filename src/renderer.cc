@@ -20,8 +20,8 @@ Renderer::Renderer(Display *display) : Renderer(display, DEFAULT_DRAW_COLOR_R, D
 
 Renderer::~Renderer()
 {
-    for (unsigned int i = 0; i < cameras.size(); i++)
-        delete cameras[i];
+    //for (unsigned int i = 0; i < cameras.size(); i++)
+    //    delete cameras[i];
 
 	SDL_DestroyRenderer(renderer);
 }
@@ -42,8 +42,6 @@ void Renderer::Init()
 
     activeCamera->w = display->GetWidth();
     activeCamera->h = display->GetHeight();
-
-    cameras.push_back(activeCamera);
 }
 
 
@@ -89,12 +87,7 @@ void Renderer::SetDrawColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 
 bool Renderer::CameraExists(std::string name)
 {
-    for (unsigned int i = 0; i < cameras.size(); i++) {
-        if (cameras[i]->GetName() == name)
-            return true;
-    }
-
-    return false;
+    return cameras.find(name) != cameras.end();
 }
 
 Camera *Renderer::CreateCamera(std::string name)
@@ -102,17 +95,14 @@ Camera *Renderer::CreateCamera(std::string name)
     if (CameraExists(name))
         return NULL;
 
-    Camera *camera = new Camera(name);
-    cameras.push_back(camera);
-    return camera;
+    cameras[name] = Camera();
+    return &cameras[name];
 }
 
 Camera *Renderer::GetCamera(std::string name)
 {
-    for (unsigned int i = 0; i < cameras.size(); i++) {
-        if (cameras[i]->GetName() == name)
-            return cameras[i];
-    }
+    if (CameraExists(name))
+        return &cameras[name];
 
     return NULL;
 }
@@ -132,19 +122,13 @@ void Renderer::SetActiveCamera(std::string name)
 
 void Renderer::DestroyCamera(std::string name)
 {
-    std::vector<Camera*>::iterator remove = cameras.begin();
-    Camera *camera = NULL;
-
-    for (unsigned int i = 0; i < cameras.size(); i++) {
-        if (cameras[i]->GetName() == name) {
-            camera = cameras[i];
-            remove += i;
-        }
-    }
-
-    if (camera == NULL)
+    if (name == "Main")
         return;
 
-    cameras.erase(remove);
-    delete camera;
+    Camera *camera = GetCamera(name);
+
+    if (camera == activeCamera)
+        activeCamera = GetCamera("Main");
+
+    cameras.erase(name);
 }

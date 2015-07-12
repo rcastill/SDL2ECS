@@ -14,6 +14,7 @@
 
 class Entity;
 class Time;
+class Camera;
 
 class Component
 {

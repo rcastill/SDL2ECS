@@ -9,11 +9,12 @@
 #include <cassert>
 #include <iostream>
 #include "transform.h"
+#include "renderer.h"
+#include "camera.h"
 
 class Entity;
 class Time;
-
-using namespace std;
+class Camera;
 
 class Component
 {
@@ -21,10 +22,10 @@ private:
 	Game *game;
 	Entity *entity;
 
-	string failureDetail;
+	std::string failureDetail;
 
 protected:
-	void PushError(string failureDetail);
+	void PushError(std::string failureDetail);
 
 public:
 	Component();
@@ -32,6 +33,8 @@ public:
 
 	void SetGame(Game *game);
 	void SetEntity(Entity *entity);
+
+    Entity *GetEntity();
 
 	Transform &GetTransform();
 
@@ -55,10 +58,18 @@ public:
 
     float GetDeltaTime();
 
-	string GetError();
+	std::string GetError();
 
     void Stop();
-	
+
+    Camera *CreateCamera(std::string name);
+    Camera *GetCamera(std::string name);
+    
+    void SetActiveCamera(Camera *camera);
+    void SetActiveCamera(std::string name);
+
+    void DestroyCamera(std::string name); 
+
 	virtual bool Init();
 	virtual void Update();
 };

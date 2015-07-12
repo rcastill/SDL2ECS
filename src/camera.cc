@@ -1,12 +1,16 @@
 #include "camera.h"
 
-Camera::Camera(std::string pname) : name(pname), followed(NULL), x(0), y(0), w(0), h(0)
+Camera::Camera() : followed(NULL), x(0), y(0), w(0), h(0)
 {
 }
 
-std::string Camera::GetName()
+Camera::Camera(const Camera &other)
 {
-    return name;
+    followed = other.followed;
+    x = other.x;
+    y = other.y;
+    w = other.w;
+    h = other.h;
 }
 
 void Camera::SetPosition(int x, int y)
