@@ -13,6 +13,7 @@ class Camera
 {
 private:
     Transform *followed;
+    SDL_Rect relativeRect;
     
 public:
     int x;
@@ -31,6 +32,8 @@ public:
     void Follow(Component *component);
 
     void Unfollow();
+
+    SDL_Rect *GetRelativeRect(Entity *entity);
 };
 
 #endif

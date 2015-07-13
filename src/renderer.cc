@@ -39,9 +39,6 @@ void Renderer::Init()
 	SetDrawColor(drawR, drawG, drawB, drawA);
 
     activeCamera = CreateCamera("Main");
-
-    activeCamera->w = display->GetWidth();
-    activeCamera->h = display->GetHeight();
 }
 
 
@@ -66,8 +63,47 @@ void Renderer::RenderTextures()
 	for (unsigned int i = 0; i < entities.size(); i++) {
 		Texture *texture = entities[i]->GetTexture();
 
-		if (texture != NULL)
-            SDL_RenderCopyEx(renderer, texture->GetSDLTexture(), texture->GetFrame(), entities[i]->GetTransform().GetSDLRect(), entities[i]->GetTransform().r, NULL, SDL_FLIP_NONE);
+		if (texture != NULL) {
+            Transform &t = entities[i]->GetTransform();
+
+            SDL_Rect clip;
+            SDL_Rect quad;
+
+            SDL_Rect *dstrect;
+            SDL_Rect *srcrect;
+
+            if (texture->IsStatic()) {
+                /* If texture is static then:
+                 * we want srcrect to be the
+                 * same rect as activeCamera
+                 * and fit dstrect with the
+                 * same dimensions + offset
+                 * in (0, 0)
+                 */
+                srcrect = &clip;
+                dstrect = &quad;
+                
+                clip.x = activeCamera->x;
+                clip.y = activeCamera->y;
+                clip.w = activeCamera->w;
+                clip.h = activeCamera->h;
+
+                quad.x = 0;
+                quad.y = 0;
+                quad.w = activeCamera->w;
+                quad.h = activeCamera->h;
+            } else {
+                /* If texture is not static then:
+                 * we want srcrect to be the full
+                 * texture and dstrect's offset
+                 * to be relative to activeCamera
+                 */
+                srcrect = NULL;
+                dstrect = activeCamera->GetRelativeRect(entities[i]);
+            }
+           
+            SDL_RenderCopyEx(renderer, texture->GetSDLTexture(), srcrect, dstrect, t.r, NULL, SDL_FLIP_NONE);
+        }
 	}
 }
 
@@ -96,7 +132,12 @@ Camera *Renderer::CreateCamera(std::string name)
         return NULL;
 
     cameras[name] = Camera();
-    return &cameras[name];
+    Camera &camera = cameras[name];
+
+    camera.w = display->GetWidth();
+    camera.h = display->GetHeight();
+
+    return &camera;
 }
 
 Camera *Renderer::GetCamera(std::string name)

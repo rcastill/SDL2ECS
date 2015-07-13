@@ -5,6 +5,7 @@ class WASDController : public Component
 {
 public:
     int speed;
+    Camera *mainCamera;
 
 	WASDController()
         {
@@ -16,7 +17,8 @@ public:
         
 	bool Init()
         {
-                    return true;
+            mainCamera = GetCamera("Main");
+            return true;
         }
         
 	void Update()

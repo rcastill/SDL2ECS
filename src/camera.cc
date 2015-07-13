@@ -46,3 +46,12 @@ void Camera::Unfollow()
     followed = NULL;
 }
 
+SDL_Rect *Camera::GetRelativeRect(Entity *entity)
+{
+    Transform &transform = entity->GetTransform();
+    relativeRect.x = transform.x - x;
+    relativeRect.y = transform.y - y;
+    relativeRect.w = transform.w;
+    relativeRect.h = transform.h;
+    return &relativeRect;
+}

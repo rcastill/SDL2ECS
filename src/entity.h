@@ -24,7 +24,7 @@ public:
 	Entity();
 	virtual ~Entity();
 
-	void SetTexture(string path);
+	Texture *SetTexture(string path);
 	Texture *GetTexture();
 
 	Transform &GetTransform();

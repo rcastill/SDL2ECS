@@ -23,10 +23,12 @@ void Entity::AddComponent(Component *component)
     components.push_back(component);
 }
 
-void Entity::SetTexture(string path)
+Texture *Entity::SetTexture(string path)
 {
 	if (texture == NULL)
 		texture = new Texture(path);
+
+    return texture;
 }
 
 Texture *Entity::GetTexture()

@@ -31,8 +31,11 @@ for prefab in decoded:
 
         for component in instance:
             if component == 'texture':
-                path = instance[component]
-                flines.append('%s->SetTexture("%s");' %(instanceName, path))
+                texAttrs = instance[component]
+                path = texAttrs["path"]
+                static = "false" if not texAttrs.has_key("static") else str(texAttrs["static"]).lower()
+
+                flines.append('%s->SetTexture("%s")->SetStatic(%s);' %(instanceName, path, static))
 
             elif component == 'transform':
                 curTransform = 't%d' %tcount

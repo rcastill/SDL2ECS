@@ -1,6 +1,6 @@
 #include "texture.h"
 
-Texture::Texture(string ppath) : path(ppath), texture(NULL), frame(NULL)
+Texture::Texture(string ppath, bool stex) : path(ppath), texture(NULL), frame(NULL), statictex(stex)
 {
 }
 
@@ -46,6 +46,16 @@ int Texture::GetWidth()
 int Texture::GetHeight()
 {
 	return height;
+}
+
+void Texture::SetStatic(bool on)
+{
+    statictex = on;
+}
+
+bool Texture::IsStatic()
+{
+    return statictex;
 }
 
 Texture::operator SDL_Texture *()

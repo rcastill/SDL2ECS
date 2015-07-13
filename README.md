@@ -12,4 +12,7 @@ An Entity-Component-System frontend for SDL2 written in C++.
 - [ **P** ] Support for fonts.
 - [ **P** ] Support for drawing figures.
 - [ **P** ] Improve warning and error control.
+- [ **P** ] Support for window resize.
+- [ **P** ] Support for layers.
+- [ **P** ] Support for rotation pivot.
 

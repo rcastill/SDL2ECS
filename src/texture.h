@@ -22,11 +22,13 @@ private:
 
 	int width, height;
 
+    bool statictex;
+
 public:
 	/*
 	* TODO: Add constructor allowing to select a section of the surface (frame)
 	*/
-	Texture(string path);
+	Texture(string path, bool statictex = false);
 	~Texture();
 
 	bool Load(Renderer *renderer, Entity *entity);
@@ -36,6 +38,9 @@ public:
 
 	int GetWidth();
 	int GetHeight();
+
+    void SetStatic(bool on);
+    bool IsStatic();
 
 	operator SDL_Texture*();
 };

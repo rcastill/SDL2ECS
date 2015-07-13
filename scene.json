@@ -1,7 +1,9 @@
 {
     "Player": [
         {
-            "texture": "res/mario.png",
+            "texture": {
+                "path": "res/mario.png"
+            },
 
             "transform": {
                 "x": 200,
