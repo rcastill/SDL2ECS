@@ -1,4 +1,12 @@
 {
+    "Environment": [
+        {
+            "texture": {
+                "path": "res/bg.png"
+            }
+        }
+    ],
+
     "Player": [
         {
             "texture": {
@@ -14,7 +22,5 @@
                 "speed": 10
             }
         }
-    ],
-
-    "GlobalBehaviours": [{}]
+    ]
 }

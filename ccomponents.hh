@@ -83,6 +83,15 @@ class Rotator : public Component
 class GlobalInputManager : public Component
 {
     public:
+        Camera *mainCamera;
+
+        bool Init()
+        {
+            mainCamera = GetCamera("Main");
+            assert(mainCamera != NULL);
+            return true;
+        }
+
         void Update()
         {
             if (GetKeyDown(SDLK_ESCAPE))
@@ -92,6 +101,18 @@ class GlobalInputManager : public Component
                 float fps = GetTimeSystem().GetFPS();
                 cout << "FPS: " << fps << endl;
             }
+
+            if (GetKeyPressed(SDLK_l))
+                mainCamera->x += 5;
+            
+            if (GetKeyPressed(SDLK_j))
+                mainCamera->x -= 5;
+
+            if (GetKeyPressed(SDLK_k))
+                mainCamera->y += 5;
+
+            if (GetKeyPressed(SDLK_i))
+                mainCamera->y -= 5;
         }
 };
 
